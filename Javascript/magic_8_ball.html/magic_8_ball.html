@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Magic 8 Ball</title>
+
+  <style>
+    @keyframes glowPulse {
+      0%, 100% { box-shadow: 0 0 25px 5px rgba(124, 58, 237, 0.5); }
+      50% { box-shadow: 0 0 45px 15px rgba(147, 51, 234, 0.7); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    #answer {
+      animation: fadeIn 0.6s ease forwards;
+    }
+  </style>
+</head>
+
+<body class="bg-[radial-gradient(circle_at_center,_#4c1d95_0%,_#1e1b4b_60%,_#000_100%)] min-h-screen flex items-center justify-center text-center font-sans text-amber-100">
+  
+  <div class="flex flex-col items-center space-y-6 p-8 rounded-2xl backdrop-blur-sm bg-black/20 shadow-lg">
+    <h1 class="text-5xl sm:text-6xl font-bold text-fuchsia-300 drop-shadow-lg">Magic 8 Ball 🎱</h1>
+
+    <!-- glowing orb background -->
+    <div class="relative w-48 h-48 sm:w-56 sm:h-56 flex items-center justify-center rounded-full bg-gradient-to-br from-purple-800 to-black animate-[glowPulse_4s_infinite_ease-in-out]">
+      <div id="answer" class="absolute text-2xl sm:text-3xl font-normal text-amber-200 text-center px-4"></div>
+    </div>
+
+    <!-- question input -->
+    <input 
+      type="text" 
+      id="question" 
+      placeholder="Ask your question..." 
+      class="w-72 sm:w-96 px-4 py-2 rounded-lg text-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-500"
+    />
+
+    <!-- button -->
+    <button 
+      id="askButton" 
+      class="bg-purple-600 hover:bg-purple-700 transition duration-300 text-white font-bold py-2 px-6 rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-md shadow-purple-900/40">
+      Ask the Magic 8 Ball
+    </button>
+  </div>
+
+  <script>
+    const responses = [
+      "Yes - definitely.",
+      "It is decidedly so.",
+      "Without a doubt.",
+      "Reply hazy, try again.",
+      "Ask again later.",
+      "Better not tell you now.",
+      "My sources say no.",
+      "Outlook not so good."
+    ];
+
+    document.querySelector("#askButton").onclick = function () {
+      const question = document.getElementById("question").value.trim();
+      const answer = responses[Math.floor(Math.random() * responses.length)];
+      const answerDiv = document.getElementById("answer");
+
+      if (!question) {
+        answerDiv.innerText = "You must ask a question first!";
+      } else {
+        answerDiv.innerText = answer;
+      }
+    };
+  </script>
+</body>
+</html>
