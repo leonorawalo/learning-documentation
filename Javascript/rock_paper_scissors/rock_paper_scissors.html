@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Rock, Paper, Scissors!</title>
+</head>
+<body class="bg-cyan-200 flex flex-col items-center justify-center min-h-screen p-6">
+    <!--title-->
+    <h1 class="text-6xl md:text-7xl font-bold text-teal-800 mb-12 whitespace-nowrap">Rock, Paper, Scissors!</h1>
+    <p class="text-teal-900 text-2xl mb-4">Make your choice...</p>
+    <div id="options" class="flex flex-row space-x-12 space-around ">
+        <button id="rock" onclick="playGame('rock')">
+            <div class="bg-teal-800 border-2 border-yellow-300 rounded-lg flex flex-col items-center p-4">
+            <h1 class="text-4xl">👊</h1>
+            <p class="text-yellow-300">rock</p>
+        </div>
+        </button>
+        <button id="paper" onclick="playGame('paper')">
+            <div class="bg-teal-800 border-2 border-yellow-300 rounded-lg flex flex-col items-center p-4">
+            <h1 class="text-4xl">🖐️</h1>
+            <p class="text-yellow-300">paper</p>
+        </div>
+        </button>
+        <button id="scissors" onclick="playGame('scissors')">
+           <div class="bg-teal-800 border-2 border-yellow-300 rounded-lg flex flex-col items-center p-4">
+            <h1 class="text-4xl">✌️</h1>
+            <p class="text-yellow-300">scissors</p>
+        </div> 
+        </button>
+    </div>
+    <!--<button id="play" class="mt-8 bg-teal-800 border-2 border-yellow-300 text-yellow-300 text-lg px-4 py-2 rounded-full" onclick="playGame()">Lock in</button>-->
+    <!--choices-->
+    <div class="mt-8 text-2xl text-teal-900">
+        <p>You chose: <span id="playerchoice"></span></p>
+        <p>Computer chose: <span id="compchoice"></span></p>
+    </div>
+    <div id="scores" class="mt-12 text-2xl text-teal-800">
+        <p>Player: <span id="playerscore">0</span></p>
+        <p>Computer: <span id="compscore">0</span></p>
+    </div>
+    <!--reset-->
+    <button id="reset" class="mt-12 bg-teal-800 border-2 border-yellow-300 text-yellow-300 text-lg px-4 py-2 rounded-full" onclick="resetGame()">Play again</button>
+
+    <script>
+        let victory, diplayingchoiceP;
+        let playerscore = 0;
+        let compscore = 0;
+
+        function playGame(playerchoice){
+            //playerchoice = this;
+             let compchoice = ['rock', 'paper', 'scissors'][Math.floor(Math.random()*3)]; //a = [1,2,3],, so you can do a*Math.random() OOOOORRRR you can just define a directly without doing the whole declaration
+
+        if(playerchoice === 'rock'){
+            diplayingchoiceP = "👊Rock"
+            if(compchoice==='scissors'){
+                victory = true;
+                document.querySelector("#compchoice").textContent = "✌️scissors";
+                //document.querySelector("#playerchoice").textContent = playerchoice;
+                playerscore +=1;
+            }
+            else if(compchoice==='paper'){
+                victory = false;
+                document.querySelector("#compchoice").textContent = "🖐️paper";
+                //document.querySelector("#playerchoice").textContent = playerchoice;
+                compscore +=1;
+            }
+            else if(compchoice==='rock'){
+                victory = null;
+                document.querySelector("#compchoice").textContent = "👊rock";
+                //document.querySelector("#playerchoice").textContent = playerchoice;
+            }
+            else{
+                victory = null;
+                //document.querySelector("#compchoice").value = compchoice;
+                //document.querySelector("#playerchoice").value = playerchoice;
+            }
+        }
+        else if(playerchoice === 'paper'){
+            diplayingchoiceP = "🖐️paper"
+            if(compchoice==='scissors'){
+                victory = false;
+                document.querySelector("#compchoice").textContent = "✌️scissors";
+                //document.querySelector("#playerchoice").value = playerchoice;
+                compscore +=1;
+            }
+            else if(compchoice==='rock'){
+                victory = true;
+                document.querySelector("#compchoice").textContent = "🖐️paper";
+                //document.querySelector("#playerchoice").value = playerchoice;
+                playerscore +=1;
+            }
+            else if(compchoice==='paper'){
+                victory = null;
+                document.querySelector("#compchoice").textContent = "👊rock";
+                //document.querySelector("#playerchoice").value = playerchoice;
+            }
+            else{
+                victory = null;
+                //document.querySelector("#compchoice").value = compchoice;
+                //document.querySelector("#playerchoice").value = playerchoice;
+            }
+        }
+        else if(playerchoice === 'scissors'){
+            diplayingchoiceP = "✌️scissors"
+            if(compchoice==='paper'){
+                let diplayingchoiceC = "🖐️paper";
+                victory = true;
+                document.querySelector("#compchoice").textContent = "🖐️paper";
+                //document.querySelector("#playerchoice").value = playerchoice;
+                playerscore +=1;
+            }
+            else if(compchoice==='rock'){
+                let diplayingchoiceC = "👊rock";
+                victory = false;
+                document.querySelector("#compchoice").textContent = "👊rock";
+                //document.querySelector("#playerchoice").value = playerchoice;
+                compscore +=1;
+            }
+            else if(compchoice==='scissors'){
+                let diplayingchoiceC = "✌️scissors";
+                victory = null;
+                document.querySelector("#compchoice").textContent = "✌️scissors";
+                //document.querySelector("#playerchoice").value = playerchoice;
+            }
+            else{
+                victory = null;
+                //document.querySelector("#compchoice").value = compchoice;
+                //document.querySelector("#playerchoice").value = playerchoice;
+            }
+        }
+        else{
+            document.querySelector("#playerchoice").value = "NULL.. Choose something!"
+        }
+           
+        document.querySelector("#playerchoice").textContent = diplayingchoiceP;
+        document.querySelector("#playerscore").textContent = playerscore;
+        document.querySelector("#compscore").textContent = compscore;
+        }
+
+        function resetGame(){
+            playerscore = 0;
+            compscore = 0;
+            document.querySelector("#playerscore").textContent = playerscore;
+            document.querySelector("#compscore").textContent = compscore;
+            document.querySelector("#playerchoice").textContent = "";
+            document.querySelector("#compchoice").textContent = "";
+        }
+    </script>
+</body>
+</html>
